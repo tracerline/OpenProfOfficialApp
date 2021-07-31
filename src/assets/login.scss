@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Dela+Gothic+One&display=swap');
+// font-family: 'Comfortaa', cursive;
+// font-family: 'Dela Gothic One', cursive;
+body{
+     background-color:black;
+     color: white;
+}
+
+h2{
+     font-family: 'Dela Gothic One', cursive;
+     font-size: 60px !important;
+     // border-bottom: 1.5px solid rgba($color: white, $alpha: .3);
+     // padding-bottom: 50px;
+     user-select: none;
+}
+
+h4{
+     font-family: 'Comfortaa';
+     font-weight: 600 !important;
+     user-select: none;
+}
+
+input{
+     padding: 14px 14px;
+     border: 1px solid black;
+     font-family: 'Comfortaa';
+     width: 100%;
+     z-index: 9999;
+     border-radius: 7px;
+     transition-property: padding;
+     transition-duration: .3s;
+     transition-timing-function: ease-in-out;
+     &:focus{
+          padding: 18px 19px;
+          border: 2px solid #EEB859;
+     }
+     cursor: pointer;
+     margin-bottom: 30px !important;
+}
+
+.btn-cst{
+     padding: 9px;
+     width: 100%;
+     color-interpolation-filters: linearRGB;
+     background-color: #59A6CC;
+     color: white;
+     border: none;
+     margin-bottom: 20px;
+     border-radius: 5px;
+     font-family: 'Dela Gothic One';
+     // width: 400px;
+     transition-property: transform, background-color, opacity;
+     transition-duration: .4s;
+     transition-timing-function: ease-out;
+     transform: scale(1);
+     opacity: 1;
+     &:hover{
+          cursor: pointer;
+          background-color: #1B4D66;
+          opacity: 1;
+     }
+     &:disabled{
+          background-color: darkslateblue;
+          opacity: .4;
+          pointer-events: none;
+     }
+     &:enabled{
+          opacity: 1;
+     }
+     &:active{
+          transform: scale(.9);
+     }
+}
+
+
+
+
+
+
+#create_account{
+     margin-top: 60px;
+     background-color: #0F0F0F;
+     border: 2px solid ghostwhite;
+     transition-property: background-color, transform, color;
+     transition-duration: .4s;
+     transition-timing-function: ease;
+     transform: scale(1);
+     color: white;
+     &:hover{
+          background-color: ghostwhite;
+          color: #0F0F0F;
+          cursor: pointer;
+          transform: scale(1.1);
+     }
+
+     &:active{
+          transform: scale(.99);
+     }
+}
+
+#connect_account{
+     margin-bottom: 20px;
+}
+
+
+.top-3{
+     margin-top: 50px;
+}

@@ -8,7 +8,7 @@ import Signin from './Signin';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/form.scss';
 import '../assets/home.scss';
-import bckSound from '../audio/freakshow.mp3';
+// import bckSound from '../audio/freakshow.mp3';
 
 // import useSound from 'use-sound';
 // import clickSound from '../audio/click.mp3';
@@ -150,17 +150,13 @@ class Login extends PureComponent {
                          <li></li>
                     </ul>
                </div >
-               <audio autoPlay loop>
+               {/* <audio autoPlay loop>
                     <source src={bckSound} type="audio/mpeg"/>
-               </audio>
+               </audio> */}
                {/* <iframe src='https://www.youtube.com/watch?v=pp5r8cWR1sQ' allow='autoplay' className="" id="iframeAudio"></iframe>  */}
                <iframe width="1424" height="519" src="https://www.youtube.com/embed/pp5r8cWR1sQ" title="YouTube video player" frameborder="0" allow="autoplay" className="nothing"></iframe>
-               {!isRedirected && !wantToSignIn && (
-                    
-                         
-                              
-          
-                    <div class='body'>    
+               {!isRedirected && !wantToSignIn && (             
+                  <div class='body'>    
                     <div class="main" id="main">
                     <div class="form-container sign-up-container">
                          <form action="#">

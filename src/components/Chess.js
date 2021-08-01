@@ -1,14 +1,17 @@
 import { React, PureComponent } from 'react';
 import '../assets/home.scss';
+import '../assets/ui.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {URL_LOGIN, getUsers, createUser, getUser} from '../api/user';
+import Modal from './Modal';
 import '../assets/chess.scss';
 import chest from '../assets/resources/chest.png';
 import alix from '../assets/resources/ALIX.png';
 import maarouf from '../assets/resources/MAROUF.png';
 import gwen from '../assets/resources/GWEN.png';
+import coin from '../assets/resources/gem.png';
 
 
 class Chess extends PureComponent {
@@ -47,6 +50,8 @@ class Chess extends PureComponent {
                          <li></li>
                     </ul>
                </div >
+               <Modal id="chess" isChess={true}/>
+               <body>
                     <div className="bar">
                          <div className="resources">
                               <div className="user-resources">
@@ -59,26 +64,97 @@ class Chess extends PureComponent {
                               </div>
                               <p className='user-inventory'>{user && user[0].gems} 
                                    <img className="coin" 
-                                   src="https://lh3.googleusercontent.com/proxy/DGC3qsMA7dvmSYt89U6X2rz69UyyZEAp_cN-Mey2jK0ezLNPJRqKSs16JVTx0udwdtvYEHqV3DFD8de1FgmSfG8ZQMC7zIKPA6FjtYvaPYm7hDRJkkdgtUkcCdOT" 
+                                   src={coin} 
                                    width="40" height="40"/>
                               </p>
                          </div>
                     </div>
-                    <div className="openChest">
-                         <img alt="" src={chest} width="300" height="300"/>
+                    <div class="d-flex-center">
+                         <div>
+                              <a className="openChest top-3" href="#chess">
+                                   <img alt="" src={chest} width="300" height="300"/>
+                              </a>
+                              <div className="cards-carousel">
+                                   <img alt="" src={maarouf} width="100" height="120"/>
+                                   <img alt="" src={gwen} width="100" height="120"/>
+                                   <img alt="" src={alix} width="100" height="120"/>
+                              </div>
+                              
+                         </div>
+                         
                     </div>
-                    <div className="cards-carousel">
-                         <img alt="" src={maarouf} width="100" height="120"/>
-                         <img alt="" src={gwen} width="100" height="120"/>
-                         <img alt="" src={alix} width="100" height="120"/>
+                    <div className="tuto px-3">
+                    <div class="courses-container">
+	                    <div class="course">
+		                    <div class="course-preview">
+			                    <h6>Défi mensuel</h6>
+			                    <h4>Les coffres</h4>
+			                    <a href="#">En savoir plus <i class="fas fa-chevron-right"></i></a>
+		                    </div>
+		                    <div class="course-info">
+			                    <div class="progress-container">
+				                    <div class="progress"></div>
+				                    <span class="progress-text dark">
+					                    0/1 coffre ouvert
+				                    </span>
+			                    </div>
+			                    <h6 class="dark strong">Challenge - Coffre</h6>
+			                    <br/>
+                                   <h6 class="dark challenge">Ouvrir au moins un coffre. <br/>En réalisant ce défi, vous gagnerez de l'expérience ainsi que des gemmes supplémentaires</h6>
+                                   <h6 class="dark">Gemmes : 50</h6>
+                                   <h6 class="dark">Expérience : 250</h6>
+                                   <hr/>
+			                    <button class="btn top-3">Vérifier</button>
+		                    </div>
+	                    </div>
+                         <div class="course">
+		                    <div class="course-preview">
+			                    <h6>Défi mensuel</h6>
+			                    <h4>Les coffres</h4>
+			                    <a href="#">En savoir plus <i class="fas fa-chevron-right"></i></a>
+		                    </div>
+		                    <div class="course-info">
+			                    <div class="progress-container">
+				                    <div class="progress"></div>
+				                    <span class="progress-text dark">
+					                    0/1 carte ultra
+				                    </span>
+			                    </div>
+			                    <h6 class="dark strong">Challenge - Coffre</h6>
+			                    <br/>
+                                   <h6 class="dark challenge">Obtenir une carte de rareté Ultra en ouvrant un coffre. <br/>En réalisant ce défi, vous gagnerez de l'expérience ainsi que des gemmes supplémentaires</h6>
+                                   <h6 class="dark">Gemmes : 500</h6>
+                                   <h6 class="dark">Expérience : 1500</h6>
+                                   <hr/>
+			                    <button class="btn top-3">Vérifier</button>
+		                    </div>
+	                    </div>
+                         <div class="course">
+		                    <div class="course-preview">
+			                    <h6>Défi mensuel</h6>
+			                    <h4>Les coffres</h4>
+			                    <a href="#">En savoir plus <i class="fas fa-chevron-right"></i></a>
+		                    </div>
+		                    <div class="course-info">
+			                    <div class="progress-container">
+				                    <div class="progress"></div>
+				                    <span class="progress-text dark">
+					                    0/1 carte légendaire
+				                    </span>
+			                    </div>
+			                    <h6 class="dark strong">Challenge - Coffre</h6>
+			                    <br/>
+                                   <h6 class="dark challenge">Obtenir une carte de rareté Légendaire en ouvrant un coffre. <br/>En réalisant ce défi, vous gagnerez de l'expérience ainsi que des gemmes supplémentaires</h6>
+                                   <h6 class="dark">Gemmes : 100</h6>
+                                   <h6 class="dark">Expérience : 500</h6>
+                                   <hr/>
+			                    <button class="btn top-3">Vérifier</button>
+		                    </div>
+	                    </div>
                     </div>
-                    <div className="tuto">
-                         <h3>Mode d'emploi</h3>
-                         <span>Cliquez sur le coffre pour obtenir les cartes OpenProf et les collectionner</span><br/>
-                         <span>Chaque coffre coûte 10 gems, et peut contenir n'importe quelle carte</span><br/>
-                         <span>Communes, rares, épiques, légendaire et ultras, prouvez aux autres joueurs</span><br/>
-                         <span>que vous êtes le plus chanceux</span>
                     </div>
+                    
+                    </body>
                </>
                
           )

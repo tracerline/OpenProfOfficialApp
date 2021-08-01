@@ -38,11 +38,14 @@
      margin-top: 20px;
      margin-bottom: 40px;
      // background: #5e42a6;
-     background: rgba($color: #5e42a6, $alpha: .3);
+    //  background: rgba($color: #5e42a6, $alpha: .3);
      padding-top: 20px;
      padding-bottom: 40px;
      margin-right: 40px;
      margin-left: 40px;
+     padding-left: 0%;
+    //  display: inline;
+    //  text-align: center;
      width: auto;
 }
 
@@ -196,3 +199,119 @@
      }
  
  }
+
+
+ .course {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	margin: 20px;
+	overflow: hidden;
+	width: 95%;
+}
+
+.course h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.course h2 {
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.course-preview {
+	background-color: #2A265F;
+	color: #fff;
+	padding: 30px;
+	max-width: 250px;
+}
+
+.course-preview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 30px;
+	text-decoration: none;
+}
+
+.course-info {
+	padding: 30px;
+	position: relative;
+	width: 100%;
+}
+
+.progress-container {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	text-align: right;
+	width: 150px;
+}
+
+.progress {
+	background-color: #ddd;
+	border-radius: 3px;
+	height: 5px;
+	width: 100%;
+}
+
+.progress::after {
+	border-radius: 3px;
+	background-color: #2A265F;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5px;
+	width: 66%;
+}
+
+.progress-text {
+	font-size: 10px;
+	opacity: 0.6;
+	letter-spacing: 1px;
+}
+
+.btn {
+	background-color: #2A265F;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 12px 25px;
+	// position: absolute;
+	bottom: 30px;
+	right: 30px;
+    letter-spacing: 1px;
+    margin-top: 30px !important;
+}
+
+.strong{
+    font-weight: 600;
+    color: black;
+    opacity: 1 !important;
+    font-size: 20px !important;
+}
+
+hr{
+    color: rgba($color: darkgrey, $alpha: .8);
+    line-height: 3px;
+    opacity: .3;
+    margin-top: 15px;
+}
+
+.background-chess{
+    background: url('https://i.pinimg.com/originals/c8/18/d5/c818d51e890bebdf99c7dc86e4bc790c.gif') !important ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(.1em);
+    // background-attachment: fixed;
+}

@@ -182,7 +182,7 @@ class Login extends PureComponent {
                               <input type="email" placeholder="Email" onChange={this.emailListener} />
                               <input type="password" placeholder="Password" onChange={this.passwordListener}/>
                               {/* <a href="#">Forgot your password?</a> */}
-                              <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Sign In</button>
+                              <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Se connecter</button>
                          </form>
                     </div>
                     <div class="overlay-container">

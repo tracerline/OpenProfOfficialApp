@@ -7,6 +7,7 @@ import Modal from './Modal';
 import secretCard from '../assets/resources/SECRETE.png';
 import profilePicture from '../assets/resources/profile.png';
 import alertPicture from '../assets/resources/alert.png';
+import mobilePicture from '../assets/resources/mobile.png';
 
 // import '../assets/modal.scss';
 
@@ -87,7 +88,7 @@ class Actuality extends PureComponent {
                                         <a href="#mobile">En savoir plus</a>
                                    </div>
                               </div>
-                              <Modal imageSide={secretCard} title="Version mobile" content={"La version mobile a été mise en pause mais sera bientôt renouvellée pour devenir accessible sur les appareils Android"} id="mobile"/>
+                              <Modal imageSide={mobilePicture} title="Version mobile" content={"La version mobile a été mise en pause mais sera bientôt renouvellée pour devenir accessible sur les appareils Android"} id="mobile"/>
                          </div>
                          
                     </div>

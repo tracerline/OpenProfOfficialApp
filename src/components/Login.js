@@ -8,6 +8,7 @@ import Signin from './Signin';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/form.scss';
 import '../assets/home.scss';
+var md5 = require('md5');
 // import bckSound from '../audio/freakshow.mp3';
 
 // import useSound from 'use-sound';
@@ -99,7 +100,7 @@ class Login extends PureComponent {
           var canConnect = false
           getUsers().then((res) => { this.setState({ users: res }) }).catch((error) => { console.log(error) })
           users.map(user => {
-               if ((user.email === this.formLogin.email) && (user.password === this.formLogin.password)) {
+               if ((user.email === this.formLogin.email) && (user.password === md5(this.formLogin.password))) {
                     canConnect = true
                }
           })
@@ -154,7 +155,7 @@ class Login extends PureComponent {
                     <source src={bckSound} type="audio/mpeg"/>
                </audio> */}
                {/* <iframe src='https://www.youtube.com/watch?v=pp5r8cWR1sQ' allow='autoplay' className="" id="iframeAudio"></iframe>  */}
-               <iframe width="1424" height="519" src="https://www.youtube.com/embed/pp5r8cWR1sQ" title="YouTube video player" frameborder="0" allow="autoplay" className="nothing"></iframe>
+               {/* <iframe width="1424" height="519" src="https://www.youtube.com/embed/pp5r8cWR1sQ" title="YouTube video player" frameborder="0" allow="autoplay" className="nothing"></iframe> */}
                {!isRedirected && !wantToSignIn && (             
                   <div class='body'>    
                     <div class="main" id="main">

@@ -18,6 +18,8 @@ import paj from '../assets/resources/EL_BOSS.png';
 import vlestid from '../assets/resources/VLESTID.png';
 import Gifffer from 'gifffer';
 import '../assets/cards.scss';
+import { getUsers, updateUserCards, getUser } from '../api/user';
+import Cards from './Cards';
 
 
 class Modal extends PureComponent {
@@ -28,6 +30,7 @@ class Modal extends PureComponent {
                user: null,
                isCard: false,
                cardChoosen: null,
+               
           }
           // this.cards = [gaillard, lbath, muridi, alix, vlestid, maarouf, gwen, cardon, gogueyTOTY, rhety, paj];
           this.cards = {
@@ -42,15 +45,53 @@ class Modal extends PureComponent {
                "rhety": 0.0125,
                "paj":  0.0125,
           }
+          this.userCards = null
           this.choose = this.choose.bind(this);
+          this.getCardsUser = this.getCardsUser.bind(this)
+;          this.pattern = [{
+               "gaillard":{"isGet": false, "nb": 0},
+               "lbath":{"isGet": false, "nb": 0},
+               "muridi":{"isGet": false, "nb": 0},
+               "alix":{"isGet": false, "nb": 0},
+               "maarouf":{"isGet": false, "nb": 0},
+               "gwen":{"isGet": false, "nb": 0},
+               "cardon":{"isGet": false, "nb": 0},
+               "gogueyTOTY":{"isGet": false, "nb": 0},
+               "rhety":{"isGet": false, "nb": 0},
+               "paj":{"isGet":  false, "nb": 0}
+          }]
      }
      componentDidMount = () =>{
           Gifffer();
-          // getUsers().then((res) => {
-          //      this.setState({ users: res })
-          //      console.log("RES --> ", res)
-          // }).catch((error) => { console.log(error) })
-          // getUser(this.props.auth[0]).then(res=>{this.setState({user: res}); console.log("user", res)}).catch(error=>console.log(error))
+          this.getCardsUser();
+          this.props.pseudo && getUser(this.props.pseudo).then(
+               res=>{
+                    console.log("only user : ", res)
+                    this.userCards = JSON.parse(res[0].cards)
+                    // console.log("gaillard test", this.userCards[0]["gaillard"].isGet)
+               }
+          )
+     }
+
+     updateCards(){
+          updateUserCards(this.props.pseudo, this.userCards)
+          .then(toast.dark("Inventaire mis à jour"))
+          .catch(error=>{console.log(error)})
+     }
+
+     getCardsUser(){
+          getUsers().then((res) => {
+               this.setState({ users: res })
+               res.map(user=>{
+                    if(user.cards === null) {
+                         updateUserCards(user.pseudo, this.pattern)
+                         .then(res2=>{console.log("ok")})
+                         .catch(error2=>{console.log(error2)})
+                    }
+                    
+               })
+               
+          }).catch((error) => { console.log(error) });
      }
      get(input) {
           var array = []; // Just Checking...
@@ -61,60 +102,106 @@ class Modal extends PureComponent {
                   }
               }
           }
-          // Probability Fun
           return array[Math.floor(Math.random() * array.length)];
       }
-     // pickAWinningItem(data) {
-     //      var winner = Math.random();
-     //      var threshold = 0;
-     //      for (let i = 0; i < data.length; i++) {
-     //          threshold += data[i].prob;
-     //          if (threshold > winner) {
-     //              return data[i]
-      
-     //          }
-     //      }
-     //  }
 
      choose(){
+          var cards = this.userCards[0]
           this.setState({isCard: true});
           var randomCard = this.get(this.cards)
           if(randomCard){
                this.setState({cardChoosen: randomCard})
           }
           switch (randomCard) {
+
                case "gaillard":
                     this.setState({cardChoosen: gaillard})
+                    if(!cards["gaillard"].isGet){
+                         cards["gaillard"].isGet = true
+                    }
+                    cards["gaillard"].nb += 1
+                    this.updateCards()
+                    
                break;
                case "lbath":
                     this.setState({cardChoosen: lbath})
+                    if(!cards["lbath"].isGet){
+                         cards["lbath"].isGet = true
+                    }
+                    cards["lbath"].nb += 1
+                    this.updateCards()
                break;
                case "muridi":
                     this.setState({cardChoosen: muridi})
+                    if(!cards["muridi"].isGet){
+                         cards["muridi"].isGet = true
+                    }
+                    cards["muridi"].nb += 1
+                    this.updateCards()
                break;
                case "alix":
                     this.setState({cardChoosen: alix})
+                    if(!cards["alix"].isGet){
+                         cards["alix"].isGet = true
+                    }
+                    cards["alix"].nb += 1
+                    this.updateCards()
                break;
                case "vlestid":
                     this.setState({cardChoosen: vlestid})
+                    if(!cards["vlestid"].isGet){
+                         cards["vlestid"].isGet = true
+                    }
+                    cards["vlestid"].nb += 1
+                    this.updateCards()
                break;
                case "gwen":
                     this.setState({cardChoosen: gwen})
+                    if(!cards["gwen"].isGet){
+                         cards["gwen"].isGet = true
+                    }
+                    cards["gwen"].nb += 1
+                    this.updateCards()
                break;
                case "maarouf":
                     this.setState({cardChoosen: maarouf})
+                    if(!cards["maarouf"].isGet){
+                         cards["maarouf"].isGet = true
+                    }
+                    cards["maarouf"].nb += 1
+                    this.updateCards()
                break;
                case "cardon":
                     this.setState({cardChoosen: cardon})
+                    if(!cards["cardon"].isGet){
+                         cards["cardon"].isGet = true
+                    }
+                    cards["cardon"].nb += 1
+                    this.updateCards()
                break;
                case "gogueyTOTY":
                     this.setState({cardChoosen: gogueyTOTY})
+                    if(!cards["gogueyTOTY"].isGet){
+                         cards["gogueyTOTY"].isGet = true
+                    }
+                    cards["gogueyTOTY"].nb += 1
+                    this.updateCards()
                break;
                case "paj":
                     this.setState({cardChoosen: paj})
+                    if(!cards["paj"].isGet){
+                         cards["paj"].isGet = true
+                    }
+                    cards["paj"].nb += 1
+                    this.updateCards()
                break;
                case "rhety":
                     this.setState({cardChoosen: rhety})
+                    if(!cards["rhety"].isGet){
+                         cards["rhety"].isGet = true
+                    }
+                    cards["rhety"].nb += 1
+                    this.updateCards()
                break;
                default:
                     toast.error("Connexion avec le serveur perdue, veuillez vous reconnecter")

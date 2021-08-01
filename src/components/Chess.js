@@ -48,7 +48,7 @@ class Chess extends PureComponent {
                          <li></li>
                     </ul>
                </div >
-               <Modal id="chess" isChess={true}/>
+               <Modal id="chess" isChess={true} pseudo={this.props.auth[0]}/>
                <body>
                     <div className="bar">
                          <div className="resources">

@@ -9,7 +9,7 @@ import Loader from './Loader';
 import Cards from './Cards';
 import { Redirect } from 'react-router-dom';
 import Shop from './Shop';
-// import bckSound from '../audio/freakshow.mp3';
+import bckSound from '../audio/freakshow.mp3';
 
 class Home extends PureComponent {
      constructor() {
@@ -57,7 +57,9 @@ class Home extends PureComponent {
                <>
                
                <main onkeydown="return (event.keyCode != 116)" className="row">
-                    
+                    <audio autoPlay loop>
+                         <source src={bckSound} type="audio/mpeg"/>
+                    </audio>
                     <aside className="sidebar col-lg-4">
                          <nav className="nav">
                               <ul>
@@ -87,7 +89,7 @@ class Home extends PureComponent {
                               <Chess auth={this.props.auth}/>
                          )}
                          {currentItem===2 && (
-                              <Cards />
+                              <Cards auth={this.props.auth}/>
                          )}
                          {currentItem===3 && (
                               <Shop />

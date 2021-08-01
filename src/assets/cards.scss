@@ -35,8 +35,21 @@
           transform: scale(1);
           padding: auto;
           &:hover{
-               transform: scale(1.08);
+               // transform: scale(1.08);
                padding: 10px;
           }
      }
+}
+
+img.disabled{
+     // transform: scale(1.08);
+               pointer-events: none ;
+               filter: grayscale(2) ;
+               opacity: .7 ;
+}
+
+img.clear{
+     pointer-events: all;
+               filter: grayscale(0) !important;
+               opacity: 1 !important;
 }

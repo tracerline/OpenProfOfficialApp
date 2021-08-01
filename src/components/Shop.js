@@ -3,8 +3,6 @@ import '../assets/home.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/ui.scss';
 import '../assets/chess.scss';
-import Modal from './Modal';
-import secretCard from '../assets/resources/SECRETE.png';
 // import '../assets/modal.scss';
 import '../assets/shop.scss';
 import pileOfGems from '../assets/pileofgems.png';

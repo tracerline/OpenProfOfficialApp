@@ -315,3 +315,11 @@ hr{
     backdrop-filter: blur(.1em);
     // background-attachment: fixed;
 }
+
+.background-open-chess{
+    background: url('../assets/resources/openChest.gif') !important ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(.1em);
+    // background-attachment: fixed;
+}

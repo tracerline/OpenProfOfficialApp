@@ -33,7 +33,7 @@ class Home extends PureComponent {
           updateUser(pseudo, __data__)
           .then(
                res=>{
-                    toast.success("Déconnexion réussie")
+                    toast.dark("Vous êtes désormais déconnecté")
                     console.log(res)
                     this.setState({redirect: true})
                }
@@ -62,18 +62,18 @@ class Home extends PureComponent {
                     <aside className="sidebar col-lg-4">
                          <nav className="nav">
                               <ul>
-                                   <li className={currentItem==0 && 'active'} onClick={()=>{this.setState({currentItem: 0})}}><a href="#">Accueil</a></li>
-                                   <li className={currentItem==1 && 'active'} onClick={()=>{this.setState({currentItem: 1})}}><a href="#">Coffres</a></li>
-                                   <li className={currentItem==2 && 'active'} onClick={()=>{this.setState({currentItem: 2})}}><a href="#">Inventaire</a></li>
-                                   <li className={currentItem==3 && 'active'} onClick={()=>{this.setState({currentItem: 3})}}><a href="#">Boutique</a></li>
-                                   <li className={currentItem==4 && 'active'} onClick={()=>{this.setState({currentItem: 4})}}hidden><a href="#">Online</a></li>
-                                   <li className={currentItem==5 && 'active'}><span onClick={()=>this.deconnect(this.props.auth[0])}>Déconnexion</span></li>
+                                   <li className={currentItem===0 && 'active'} onClick={()=>{this.setState({currentItem: 0})}}><a href="#accueil">Accueil</a></li>
+                                   <li className={currentItem===1 && 'active'} onClick={()=>{this.setState({currentItem: 1})}}><a href="#coffre">Coffres</a></li>
+                                   <li className={currentItem===2 && 'active'} onClick={()=>{this.setState({currentItem: 2})}}><a href="#inventaire">Inventaire</a></li>
+                                   <li className={currentItem===3 && 'active'} onClick={()=>{this.setState({currentItem: 3})}}><a href="#boutique">Boutique</a></li>
+                                   <li className={currentItem===4 && 'active'} onClick={()=>{this.setState({currentItem: 4})}}hidden><a href="#online">Online</a></li>
+                                   <li className={currentItem===5 && 'active'}><span onClick={()=>this.deconnect(this.props.auth[0])}>Déconnexion</span></li>
                               </ul>
                          </nav>
                     </aside>
                     { this.state.redirect ? (<Redirect push to="/home"/>) : null }
                     <section className="col-lg-8" id="waiter-area">
-                         {currentItem==null &&(
+                         {currentItem===null &&(
                               <Loader />
                          )}
                          {/* <div className="home">
@@ -81,16 +81,16 @@ class Home extends PureComponent {
                               <p className='muted'>Bienvenue sur OpenWeb{this.props.account[0].charAt(0). toUpperCase() + this.props.account[0].slice(1)} ! <br/>
                               Depuis la version mobile, l'équipe de développeur <br/> n'a cessé de travailler pour produire la version Windows/Mac & Linux d'OpenProf</p>
                          </div> */}
-                         {currentItem==0 && (
+                         {currentItem===0 && (
                               <Actuality />
                          )}
-                         {currentItem==1 && (
+                         {currentItem===1 && (
                               <Chess auth={this.props.auth}/>
                          )}
-                         {currentItem==2 && (
+                         {currentItem===2 && (
                               <Cards />
                          )}
-                         {currentItem==3 && (
+                         {currentItem===3 && (
                               <Shop />
                          )}
                          

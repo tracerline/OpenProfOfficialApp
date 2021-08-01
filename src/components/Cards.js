@@ -1,11 +1,7 @@
 import { React, PureComponent } from 'react';
 import '../assets/home.scss';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {URL_LOGIN, getUsers, createUser, getUser} from '../api/user';
 import '../assets/chess.scss';
-import chest from '../assets/resources/chest.png';
 import alix from '../assets/resources/ALIX.png';
 import maarouf from '../assets/resources/MAROUF.png';
 import gwen from '../assets/resources/GWEN.png';
@@ -40,8 +36,8 @@ class Cards extends PureComponent {
           // const {users, user} = this.state
           return (
                <>
-               <div class="area" >
-                    <ul class="circles">
+               <div className="area" >
+                    <ul className="circles">
                          <li></li>
                          <li></li>
                          <li></li>
@@ -57,57 +53,57 @@ class Cards extends PureComponent {
                <div className="cards">
                     <div>
                          <h3>Gaillard</h3>
-                         <h4 class='common'>Carte commune</h4>
+                         <h4 className='common'>Carte commune</h4>
                          <img src={gaillard} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Lbath 7</h3>
-                         <h4 class='common'>Carte commune</h4>
+                         <h4 className='common'>Carte commune</h4>
                          <img src={lbath} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Goguey</h3>
-                         <h4 class='rare'>Carte rare</h4>
+                         <h4 className='rare'>Carte rare</h4>
                          <img src={alix} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Muridi</h3>
-                         <h4 class='rare'>Carte rare</h4>
+                         <h4 className='rare'>Carte rare</h4>
                          <img src={muridi} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Vlestid</h3>
-                         <h4 class='rare'>Carte rare</h4>
+                         <h4 className='rare'>Carte rare</h4>
                          <img src={vlestid} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Faarouf</h3>
-                         <h4 class='epic'>Carte épique</h4>
+                         <h4 className='epic'>Carte épique</h4>
                          <img src={maarouf} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Salaun</h3>
-                         <h4 class='epic'>Carte épique</h4>
+                         <h4 className='epic'>Carte épique</h4>
                          <img src={gwen} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Carton</h3>
-                         <h4 class='legendary'>Carte légendaire</h4>
+                         <h4 className='legendary'>Carte légendaire</h4>
                          <img src={cardon} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Goguey Toty</h3>
-                         <h4 class='legendary'>Carte légendaire</h4>
+                         <h4 className='legendary'>Carte légendaire</h4>
                          <img src={gogueyTOTY} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Monseigneur</h3>
-                         <h4 class='ultra'>Carte ultra</h4>
+                         <h4 className='ultra'>Carte ultra</h4>
                          <img src={rhety} alt="" width="210" height="250"/>
                     </div>
                     <div>
                          <h3>Paj</h3>
-                         <h4 class='ultra'>Carte ultra</h4>
+                         <h4 className='ultra'>Carte ultra</h4>
                          <img src={paj} alt="" width="210" height="250"/>
                     </div>
                </div>

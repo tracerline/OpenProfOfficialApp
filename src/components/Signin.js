@@ -1,9 +1,8 @@
 import { React, PureComponent } from 'react';
 import '../assets/login.scss';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { URL_LOGIN, getUsers, createUser } from '../api/user';
+import { getUsers, createUser } from '../api/user';
 import Login from './Login';
 
 
@@ -75,7 +74,7 @@ class Signin extends PureComponent {
      }
 
      onSubmit = e => {
-          const { users } = this.state
+          // const { users } = this.state
           e.preventDefault()
           const __DATA__ = {
                email: this.formLogin && this.formLogin.email,
@@ -95,7 +94,7 @@ class Signin extends PureComponent {
 
      signIn(data) {
           var canLog = false
-          createUser(data).then((res)=>{
+          createUser(data).then(()=>{
                canLog=true
                toast.success("Compte créé !") && this.setState({isRedirected: true})
           }).catch(error=>{
@@ -125,7 +124,7 @@ class Signin extends PureComponent {
 
      render() {
           // formulaire
-          const { emailCorrect, passwordCorrect, isRedirected } = this.state
+          const { isRedirected } = this.state
           return (
                <>
                {!isRedirected ? (

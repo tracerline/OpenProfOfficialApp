@@ -2,15 +2,12 @@ import { React, PureComponent } from 'react';
 import '../assets/login.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { URL_LOGIN, getUsers, createUser, updateUser } from '../api/user';
+import { getUsers, updateUser } from '../api/user';
 import Home from './Home';
 import Signin from './Signin';
-import openprofLogo from '../assets/openprof.png';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/form.scss';
 import '../assets/home.scss';
-import bckSound from '../audio/freakshow.mp3';
 // import useSound from 'use-sound';
 // import clickSound from '../audio/click.mp3';
 
@@ -41,9 +38,9 @@ class Login extends PureComponent {
                this.setState({ users: res })
                console.log("RES --> ", res)
           }).catch((error) => { console.log(error) })
-          if(!this.state.isRedirected){
-               toast.dark("Vous êtes désormais déconnecté");
-          }
+          // if(!this.state.isRedirected){
+          //      toast.dark("Vous êtes désormais déconnecté");
+          // }
      }
 
      emailListener = e => {
@@ -76,10 +73,10 @@ class Login extends PureComponent {
      onSubmit = e => {
           const { users } = this.state
           e.preventDefault()
-          const __DATA__ = {
-               email: this.formLogin && this.formLogin.email,
-               password: this.formLogin && this.formLogin.password
-          }
+          // const __DATA__ = {
+          //      email: this.formLogin && this.formLogin.email,
+          //      password: this.formLogin && this.formLogin.password
+          // }
           this.setState({
                connexionToast: (<ToastContainer />)
           })
@@ -100,7 +97,7 @@ class Login extends PureComponent {
           var canConnect = false
           getUsers().then((res) => { this.setState({ users: res }) }).catch((error) => { console.log(error) })
           users.map(user => {
-               if ((user.email == this.formLogin.email) && (user.password == this.formLogin.password)) {
+               if ((user.email === this.formLogin.email) && (user.password === this.formLogin.password)) {
                     canConnect = true
                }
           })
@@ -119,7 +116,7 @@ class Login extends PureComponent {
           updateUser(pseudo, __data__)
           .then(
                res=>{
-                    toast.success("Connexion réussie")
+                    toast.dark("Bienvenue sur OpenProf Web Édition !")
                     console.log(res)
                }
           )
@@ -133,7 +130,7 @@ class Login extends PureComponent {
 
      render() {
           // formulaire
-          const { emailCorrect, passwordCorrect, connexionToast, isRedirected, wantToSignIn, users } = this.state
+          const { emailCorrect, passwordCorrect, connexionToast, isRedirected, wantToSignIn } = this.state
           return (
                <>
                
@@ -166,9 +163,9 @@ class Login extends PureComponent {
                               {connexionToast}
                               <h1>Create Account</h1>
                               <div class="social-container">
-                                   <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                                   <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                                   <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                   <a href="#social" class="social"><i class="fab fa-facebook-f"></i></a>
+                                   <a href="#social" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                   <a href="#social" class="social"><i class="fab fa-linkedin-in"></i></a>
                               </div>
                          </form>
                     </div>

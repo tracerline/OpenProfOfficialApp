@@ -9,7 +9,7 @@ import Loader from './Loader';
 import Cards from './Cards';
 import { Redirect } from 'react-router-dom';
 import Shop from './Shop';
-import bckSound from '../audio/freakshow.mp3';
+// import bckSound from '../audio/freakshow.mp3';
 
 class Home extends PureComponent {
      constructor() {
@@ -21,8 +21,9 @@ class Home extends PureComponent {
           this.deconnect = this.deconnect.bind(this);
      }
      componentDidMount = () =>{
+          toast.dark("Bienvenue sur OpenProf !")
           
-     }
+     } 
 
      deconnect(pseudo){
           this.setState({currentItem: 5, redirect: true})
@@ -54,9 +55,7 @@ class Home extends PureComponent {
           const {currentItem} = this.state
           return (
                <>
-               <audio autoPlay loop>
-                    <source src={bckSound} type="audio/mpeg"/>
-               </audio>
+               
                <main onkeydown="return (event.keyCode != 116)" className="row">
                     
                     <aside className="sidebar col-lg-4">

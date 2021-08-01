@@ -8,6 +8,8 @@ import Signin from './Signin';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/form.scss';
 import '../assets/home.scss';
+import bckSound from '../audio/freakshow.mp3';
+
 // import useSound from 'use-sound';
 // import clickSound from '../audio/click.mp3';
 
@@ -116,7 +118,7 @@ class Login extends PureComponent {
           updateUser(pseudo, __data__)
           .then(
                res=>{
-                    toast.dark("Bienvenue sur OpenProf Web Édition !")
+                    // toast.dark("Bienvenue sur OpenProf Web Édition !")
                     console.log(res)
                }
           )
@@ -148,9 +150,9 @@ class Login extends PureComponent {
                          <li></li>
                     </ul>
                </div >
-               {/* <audio autoPlay loop>
+               <audio autoPlay loop>
                     <source src={bckSound} type="audio/mpeg"/>
-               </audio> */}
+               </audio>
                {!isRedirected && !wantToSignIn && (
                     
                          
@@ -176,8 +178,8 @@ class Login extends PureComponent {
                                    <h5 class="dark muted">Une connexion internet moyenne est le minimum requis pour une utilisation optimale de OpenProf</h5>
                               </div>
                               <span>or use your account</span>
-                              <input type="email" placeholder="Email" onChange={this.emailListener} />
-                              <input type="password" placeholder="Password" onChange={this.passwordListener}/>
+                              <input type="email" placeholder="Identifiant OpenProf" onChange={this.emailListener} />
+                              <input type="password" placeholder="Mot de passe" onChange={this.passwordListener}/>
                               {/* <a href="#">Forgot your password?</a> */}
                               <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Se connecter</button>
                          </form>

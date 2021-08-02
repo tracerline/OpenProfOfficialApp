@@ -28,6 +28,7 @@ class Actuality extends PureComponent {
                this.listOnline(res)
           })
           .catch(error=>{console.log(error)})
+
           // this.state.players && this.listOnline(this.state.players)
      }
 
@@ -71,7 +72,7 @@ class Actuality extends PureComponent {
                                         </div>
                                    </div>
                               </div>
-                              <Modal imageSide={secretCard} title="Mises à jour" content={majModalContent} id="popup"/>
+                              <Modal imageSide={secretCard} title="Mises à jour" content={majModalContent} id="popup" isChess={false}/>
                          <div class="card">
                               <div class="box">
                                    <div class="content">
@@ -81,7 +82,7 @@ class Actuality extends PureComponent {
                                         <a href="#news">Voir les nouveautés</a>
                                    </div>
                               </div>
-                              <Modal imageSide={alertPicture} title="Nouveautés" content={news} id="news"/>
+                              <Modal imageSide={alertPicture} title="Nouveautés" content={news} id="news" isChess={false}/>
                          </div>
 
                          <div class="card">
@@ -93,7 +94,7 @@ class Actuality extends PureComponent {
                                         <a href="#account">Accéder à mon compte</a>
                                    </div>
                               </div>
-                              <Modal imageSide={profilePicture} title="Mon compte" content={"Une des fonctionnalités majeures d'OpenProf Desktop est la possibilté de gérer son compte, ses informations personnelles et en ligne"} id="account"/>
+                              <Modal imageSide={profilePicture} title="Mon compte" content={"Une des fonctionnalités majeures d'OpenProf Desktop est la possibilté de gérer son compte, ses informations personnelles et en ligne"} id="account" isChess={false}/>
                          </div>
                          <div class="card">
                               <div class="box">
@@ -104,7 +105,7 @@ class Actuality extends PureComponent {
                                         <a href="#mobile">En savoir plus</a>
                                    </div>
                               </div>
-                              <Modal imageSide={mobilePicture} title="Version mobile" content={"La version mobile a été mise en pause mais sera bientôt renouvellée pour devenir accessible sur les appareils Android"} id="mobile"/>
+                              <Modal imageSide={mobilePicture} title="Version mobile" content={"La version mobile a été mise en pause mais sera bientôt renouvellée pour devenir accessible sur les appareils Android"} id="mobile" isChess={false}/>
                          </div>
                          
                     </div>

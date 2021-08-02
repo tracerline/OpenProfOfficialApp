@@ -44,14 +44,15 @@ class Modal extends PureComponent {
                "gwen": 0.0625,
                "cardon": 0.05,
                "gogueyTOTY": 0.05,
-               "rhety": 0.0125,
-               "paj":  0.0125,
+               "rhety": 0.000125,
+               "paj":  0.000125,
           }
           this.userCards = null
           this.choose = this.choose.bind(this);
           this.getCardsUser = this.getCardsUser.bind(this)
           this.initGems = this.initGems.bind(this);
           this.changeGemsTo = this.changeGemsTo.bind(this);
+          this.clickTest = this.clickTest.bind(this);
           this.pattern = [{
                "gaillard":{"isGet": false, "nb": 0},
                "lbath":{"isGet": false, "nb": 0},
@@ -264,9 +265,12 @@ class Modal extends PureComponent {
      }
 
      clickTest(){
-          setTimeout(() => { 
-                              window.location.reload()
-                          }, 3000)}
+          if(this.props && this.props.isChess){
+               setTimeout(() => { 
+                    window.location.reload()
+                }, 3000)}
+          }
+          
                          
      
      render() {
@@ -283,8 +287,14 @@ class Modal extends PureComponent {
                                     <h1>{this.props.title}</h1>
                                     <p>{this.props.content}</p>
                                </div>
+
+                               {this.props.isChess ? (
+                                    <button class="popup__close" onClick={this.clickTest}>X</button>
+                               ) : (
+                                   <a href="#" class="popup__close" onClick={this.clickTest}>X</a>
+                               )}
                                
-                               <button class="popup__close" onClick={this.clickTest}>X</button>
+                               
                                
                           </div>
                           ) : (

@@ -42,3 +42,13 @@ export function getUserGems(pseudo){
      const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/gems`;
      return makeRequest(url, Methods.GET)
 }
+
+export function updateUserShopFreeGem(pseudo, data){
+     const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/shop`;
+     return makeRequest(url, Methods.PATCH, data)
+}
+
+export function getDateUserFreeGem(pseudo){
+     const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/shop`;
+     return makeRequest(url, Methods.GET)
+}

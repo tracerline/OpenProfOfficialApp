@@ -200,3 +200,7 @@ img {
 #pile_of_gems_text{
      color: #ddbdfc;
 }
+
+button:disabled{
+	pointer-events: none !important;
+}

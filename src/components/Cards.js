@@ -15,6 +15,7 @@ import paj from '../assets/resources/EL_BOSS.png';
 import vlestid from '../assets/resources/VLESTID.png';
 import '../assets/cards.scss';
 import { getUser } from '../api/user';
+import DateCountdown from 'react-date-countdown-timer';
 
 
 class Cards extends PureComponent {
@@ -41,9 +42,10 @@ class Cards extends PureComponent {
      }
 
      getCards(){
-          getUser(this.props.auth[0]).then(
+          console.log("this.props.auth", this.props.auth)
+          getUser(this.props.auth).then(
                res=>{
-                    console.log("only user : ", res)
+                    console.log("only user : ", res[0].cards)
                     this.setState({userCards: JSON.parse(res[0].cards)})
                     console.log("gaillard test", this.cards)
                })

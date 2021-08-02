@@ -6,8 +6,9 @@ import '../assets/chess.scss';
 // import '../assets/modal.scss';
 import '../assets/shop.scss';
 import pileOfGems from '../assets/pileofgems.png';
-import { getUserGems, updateUserGems } from '../api/user';
-import Countdown from 'react-countdown';
+import { getUserGems, updateUserGems, updateUserShopFreeGem, getDateUserFreeGem } from '../api/user';
+import Clock from './Clock';
+// import DateCountdown from 'react-date-countdown-timer';
 
 
 class Shop extends PureComponent {
@@ -16,77 +17,128 @@ class Shop extends PureComponent {
           this.state = {
 			userGems: null,
 			counter: false, 
-			textTime: "Gratuit",
-			time: {}, 
-			seconds: 500000
+			deadline: "Gratuit",
+			userDateGem: null,
 		}
 		this.timer = 0;
-		this.startTimer = this.startTimer.bind(this);
-    		this.countDown = this.countDown.bind(this);
+		
+		this.setDateCounter = this.setDateCounter.bind(this);
      }
      componentDidMount = () =>{
-          
+		console.log("pseudo", this.props.auth)
+		this.getItem()
+          getDateUserFreeGem(this.props.auth).then(res=>{this.setState({userDateGem: res[0].dateFreeGem})}).catch(error=>console.log(error))
 	}
-	
-	secondsToTime(secs){
-		let hours = Math.floor(secs / (60 * 60));
-	 
-		let divisor_for_minutes = secs % (60 * 60);
-		let minutes = Math.floor(divisor_for_minutes / 60);
-	 
-		let divisor_for_seconds = divisor_for_minutes % 60;
-		let seconds = Math.ceil(divisor_for_seconds);
-	 
-		let obj = {
-		  "h": hours,
-		  "m": minutes,
-		  "s": seconds
-		};
-		return obj;
-	   }
 
-	   componentDidMount() {
-		let timeLeftVar = this.secondsToTime(this.state.seconds);
-		this.setState({ time: timeLeftVar });
-	   }
-	 
-	   startTimer() {
-		if (this.timer == 0 && this.state.seconds > 0) {
-		  this.timer = setInterval(this.countDown, 1000);
-		}
-	   }
-	 
-	   countDown() {
-		// Remove one second, set state so a re-render happens.
-		let seconds = this.state.seconds - 1;
-		this.setState({
-		  time: this.secondsToTime(seconds),
-		  seconds: seconds,
-		});
+	pad(num) { return ('00'+num).slice(-2) };
+
+	convertDateForSQL(date){
+		date = new Date();
+		var tomorrow = new Date();
 		
-		// Check if we're at zero.
-		if (seconds == 0) { 
-		  clearInterval(this.timer);
-		}
-	   }
+		date = date.getUTCFullYear()         + '-' +
+        	this.pad(date.getUTCMonth() + 1)  + '-' +
+        	this.pad(date.setDate(date.getDate()+1))       + ' ' +
+        	this.pad(date.getUTCHours())      + ':' +
+        	this.pad(date.getUTCMinutes())    + ':' +
+		   this.pad(date.getUTCSeconds());
+		return date
+	} 
 
 	getItem(){
-		getUserGems().then(res=>{this.setState({userGems: res[0].gem, counter: true})}).catch(error=>{console.warn(error)})
+		getUserGems(this.props.auth).then(res=>{this.setState({userGems: res[0].gem, counter: true})}).catch(error=>{console.warn(error)})
 		var _DATA_ = {
 			"gems": this.state.userGems + 100
 		}
 		updateUserGems(this.props.auth && this.props.auth, _DATA_)
 		.then(res=>{console.log(res)})
 		.catch(error=>{console.log(error)})
-
-	
-		
-          // Update the count down every 1 second
-          
 	}
 
 
+	setDateCounter(){
+		var today = new Date()
+		var tomorrow = new Date()
+		tomorrow.setDate(today.getDate()+1)
+		tomorrow.setMonth(today.getMonth()+1)
+		var month = tomorrow.getMonth().toString()
+		var day = tomorrow.getDate().toString()
+		// console.log("day test ==> ",a.getDate())
+		var year = tomorrow.getFullYear().toString()
+		console.log("day", day)
 
+		
+		var dl = "" + year+ "-" + "0" + month + "-" + "0" + day
+		// this.setState({deadline:dl})
+		var dateToSendToDB = this.convertDateForSQL(tomorrow)
+		console.log("date w/ day+1 : ", dl);
+		updateUserShopFreeGem(this.props.auth, {"date": dl})
+			.then(res=>{
+				console.log(res)
+				updateUserGems(this.props.pseudo, {"gems": this.state.userGems + 100})
+				.then(res=>console.log(res))
+				.catch(error=>console.log(error))
+			})
+			.catch(error=>console.log(error))
+
+		console.log(this.convertDateForReactCountdown(dl))
+		getDateUserFreeGem(this.props.auth).then(res=>{
+			this.setState({userDateGem: this.convertDateForReactCountdown((res[0].dateFreeGem).toString())})
+			console.log("USER FREE GEMS MODIFIED : ", this.state.userDateGem)
+
+		}).catch(error=>console.log(error))
+	}
+
+	convertDateForReactCountdown(date){
+
+		var new_date = date.split('-')
+		var year = new_date[0]
+		var month = new_date[1]
+		var day = new_date[2]
+		switch (month) {
+			case "01":
+			month = "January"
+			break;
+			case "02":
+			month = "February"
+			break;
+			case "03":
+			month = "March"
+			break;
+			case "04":
+			month = "April"
+			break;
+			case "05":
+			month = "May"
+			break;
+			case "06":
+			month = "June"
+			break;
+			case "07":
+			month = "July"
+			break;
+			case "08":
+			month = "August"
+			break;
+			case "09":
+			month = "September"
+			break;
+			case "10":
+			month = "October"
+			break;
+			case "11":
+			month = "November"
+			break;
+			case "12":
+			month = "December"
+			break;
+			default:
+				break;
+		}
+		var date_render = month + ", " + day + ", " + year
+		return date_render
+		
+	}
 
      render() {
           return(
@@ -112,9 +164,20 @@ class Shop extends PureComponent {
 			                    <h3>Notes</h3>
                                    <span>Chaque jour, venez récupérer votre récompense quotidienne !</span>
 		                    </div>
-						{!this.state.counter && (
-							<button class="buy--btn top-3" onClick={this.startTimer} disabled={this.state.counter}>{this.state.time.m}min {this.state.time.s}s </button>
+						{/* {!this.state.counter && this.state.deadline==="Gratuit" ? (
+							<button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}} disabled={this.state.counter}>Gratuit</button>
+						) : (
+							<button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}} disabled={this.state.counter}><Clock deadline={this.state.deadline} /></button>
+						)} */}
+						{this.state.userDateGem === null ? (
+							<button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}}>Gratuit</button>
+						) : (
+							<button class="buy--btn top-3" disabled><Clock deadline={this.state.userDateGem}/></button>
 						)}
+						{/* <button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}}>Gratuit</button> */}
+						
+						
+						
 		                    
 	                    </div>
                     </section>

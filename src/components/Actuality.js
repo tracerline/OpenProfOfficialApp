@@ -8,6 +8,7 @@ import secretCard from '../assets/resources/SECRETE.png';
 import profilePicture from '../assets/resources/profile.png';
 import alertPicture from '../assets/resources/alert.png';
 import mobilePicture from '../assets/resources/mobile.png';
+import { getUsers } from '../api/user';
 
 // import '../assets/modal.scss';
 
@@ -16,12 +17,27 @@ class Actuality extends PureComponent {
      constructor() {
           super();
           this.state = {
+               players: null
           }
+          this.listPlayers = []
      }
      componentDidMount = () =>{
-          
+          getUsers().then(res=>{
+               this.setState({players: res})
+               console.log("players ==> ", res)
+               this.listOnline(res)
+          })
+          .catch(error=>{console.log(error)})
+          // this.state.players && this.listOnline(this.state.players)
      }
 
+     listOnline(players){
+          for (let index = 0; index < players.length; index++) {
+               const element = players[index];
+               this.listPlayers.push(element.pseudo);
+          }
+          
+     }    
 
      render() {
           // formulaire
@@ -94,7 +110,51 @@ class Actuality extends PureComponent {
                     </div>
                     
                </div>
-               
+               <div class="d-flex-center">
+               <div class="main top-3 " id="main">
+                         <div class="form-container sign-up-container">
+                              <form action="#" >
+                                   {/* {connexionToast} */}
+                                   <h1>Create Account</h1>
+                                   <div class="social-container">
+                                        <a href="#social" class="social"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#social" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                        <a href="#social" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                   </div>
+                              </form>
+                         </div>
+                         <div class="form-container sign-in-container" >
+                              <form action="#" className="chest-container">
+                                   <h1>Dashboard</h1>
+                                   <ul>
+                                        {this.state.players && this.state.players.map((player, index)=>{
+                                             <li class="dark">{player.pseudo}</li>
+                                        })}
+                                   </ul>
+                                   {/* <input type="email" placeholder="Identifiant OpenProf" onChange={this.emailListener} />
+                                   <input type="password" placeholder="Mot de passe" onChange={this.passwordListener}/>
+                                   {/* <a href="#">Forgot your password?</a> */}
+                                   {/* <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Se connecter</button> */} 
+                              </form>
+                         </div>
+                         <div class="overlay-container">
+                              <div class="overlay">
+                                   <div class="overlay-panel overlay-left">
+                                        <h1>Welcome Back!</h1>
+                                        <p>To keep connected with us please login with your personal info</p>
+                                        <button class="ghost" id="signIn">Sign In</button>
+                                   </div>
+                                   <div class="overlay-right chest-overlay">
+                                        {/* <div className="cards-carousel">
+                                             <img alt="" src={maarouf} width="100" height="120"/>
+                                             <img alt="" src={gwen} width="100" height="120"/>
+                                             <img alt="" src={alix} width="100" height="120"/>
+                                        </div> */}
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+                    </div>
                <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
                {/* <iframe className="trailer" src="https://www.youtube.com/embed/fv2Mq9d-JZg?autoplay=0&controls=0" title="OpenProf Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                          */}
                </>

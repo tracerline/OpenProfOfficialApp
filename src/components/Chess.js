@@ -144,7 +144,7 @@ class Chess extends PureComponent {
                                    <h6 className="dark">Gemmes : 50</h6>
                                    <h6 className="dark">Expérience : 250</h6>
                                    <hr/>
-			                    <button className="btn top-3">Vérifier</button>
+			                    <button className="btn top-3" disabled>Vérifier (en cours de développement)</button>
 		                    </div>
 	                    </div>
                          <div className="course">
@@ -166,7 +166,7 @@ class Chess extends PureComponent {
                                    <h6 className="dark">Gemmes : 500</h6>
                                    <h6 className="dark">Expérience : 1500</h6>
                                    <hr/>
-			                    <button className="btn top-3">Vérifier</button>
+			                    <button className="btn top-3" disabled>Vérifier (en cours de développement)</button>
 		                    </div>
 	                    </div>
                          <div className="course">
@@ -188,7 +188,7 @@ class Chess extends PureComponent {
                                    <h6 className="dark">Gemmes : 100</h6>
                                    <h6 className="dark">Expérience : 500</h6>
                                    <hr/>
-			                    <button className="btn top-3">Vérifier</button>
+			                    <button className="btn top-3" disabled>Vérifier (en cours de développement)</button>
 		                    </div>
 	                    </div>
                     </div>

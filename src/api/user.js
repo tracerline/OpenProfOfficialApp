@@ -6,7 +6,6 @@ const domain = "http://" + ip.toString() + ":" + port.toString()
 const login = "/users"
 
 
-
 export const URL_LOGIN = domain + login
 
 export function getUsers(){
@@ -32,4 +31,14 @@ export function createUser(data){
 export function updateUserCards(pseudo, data){
      const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/cards`;
      return makeRequest(url, Methods.PATCH, data)
+}
+
+export function updateUserGems(pseudo, data){
+     const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/gems`;
+     return makeRequest(url, Methods.PATCH, data)
+}
+
+export function getUserGems(pseudo){
+     const url =`http://217.160.215.195:${port.toString()}/users/${pseudo}/gems`;
+     return makeRequest(url, Methods.GET)
 }

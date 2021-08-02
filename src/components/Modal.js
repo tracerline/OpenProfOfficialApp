@@ -18,19 +18,21 @@ import paj from '../assets/resources/EL_BOSS.png';
 import vlestid from '../assets/resources/VLESTID.png';
 import Gifffer from 'gifffer';
 import '../assets/cards.scss';
-import { getUsers, updateUserCards, getUser } from '../api/user';
+import { getUsers, updateUserCards, getUser, getUserGems, updateUserGems } from '../api/user';
 import Cards from './Cards';
+import { Link } from 'react-router-dom';
 
 
 class Modal extends PureComponent {
-     constructor() {
-          super();
+     constructor(props) {
+          super(props);
           this.state = {
                users: null,
                user: null,
                isCard: false,
                cardChoosen: null,
-               
+               userGems: null,
+               haveEnoughGems: true
           }
           // this.cards = [gaillard, lbath, muridi, alix, vlestid, maarouf, gwen, cardon, gogueyTOTY, rhety, paj];
           this.cards = {
@@ -48,7 +50,9 @@ class Modal extends PureComponent {
           this.userCards = null
           this.choose = this.choose.bind(this);
           this.getCardsUser = this.getCardsUser.bind(this)
-;          this.pattern = [{
+          this.initGems = this.initGems.bind(this);
+          this.changeGemsTo = this.changeGemsTo.bind(this);
+          this.pattern = [{
                "gaillard":{"isGet": false, "nb": 0},
                "lbath":{"isGet": false, "nb": 0},
                "muridi":{"isGet": false, "nb": 0},
@@ -70,12 +74,47 @@ class Modal extends PureComponent {
                     this.userCards = JSON.parse(res[0].cards)
                     // console.log("gaillard test", this.userCards[0]["gaillard"].isGet)
                }
-          )
+          ).catch(error=>{console.log(error)})
+          this.initGems()
      }
 
      updateCards(){
           updateUserCards(this.props.pseudo, this.userCards)
           .then(toast.dark("Inventaire mis à jour"))
+          .catch(error=>{console.log(error)})
+     }
+
+     initGems(){
+          getUserGems(this.props.pseudo)
+          .then(res=>{
+               this.setState({userGems: res[0].gems})
+               console.log("gems", res[0].gems)
+          })
+          .catch(error=>{
+               console.log(error)
+          })
+     }
+
+     changeGemsTo(){
+          this.initGems()
+          var value = this.state.userGems-10
+          var _GEMS_ = {
+               "gems": value
+          }
+          if(value >= 10){
+               console.log("ok")
+          }else{
+               this.setState({haveEnoughGems: false})
+          }
+          
+          // this.initGems()
+          // this.setState({userGems: value})
+          updateUserGems(this.props.pseudo, _GEMS_)
+          .then(res=>{
+               console.log(res)
+               toast.dark("Mise à jour des gems...")
+
+          })
           .catch(error=>{console.log(error)})
      }
 
@@ -122,6 +161,7 @@ class Modal extends PureComponent {
                     cards["gaillard"].nb += 1
                     this.updateCards()
                     
+                    
                break;
                case "lbath":
                     this.setState({cardChoosen: lbath})
@@ -130,6 +170,7 @@ class Modal extends PureComponent {
                     }
                     cards["lbath"].nb += 1
                     this.updateCards()
+                    
                break;
                case "muridi":
                     this.setState({cardChoosen: muridi})
@@ -138,6 +179,7 @@ class Modal extends PureComponent {
                     }
                     cards["muridi"].nb += 1
                     this.updateCards()
+                    
                break;
                case "alix":
                     this.setState({cardChoosen: alix})
@@ -146,6 +188,7 @@ class Modal extends PureComponent {
                     }
                     cards["alix"].nb += 1
                     this.updateCards()
+                    
                break;
                case "vlestid":
                     this.setState({cardChoosen: vlestid})
@@ -154,6 +197,7 @@ class Modal extends PureComponent {
                     }
                     cards["vlestid"].nb += 1
                     this.updateCards()
+                    
                break;
                case "gwen":
                     this.setState({cardChoosen: gwen})
@@ -162,6 +206,7 @@ class Modal extends PureComponent {
                     }
                     cards["gwen"].nb += 1
                     this.updateCards()
+                    
                break;
                case "maarouf":
                     this.setState({cardChoosen: maarouf})
@@ -170,6 +215,7 @@ class Modal extends PureComponent {
                     }
                     cards["maarouf"].nb += 1
                     this.updateCards()
+                    
                break;
                case "cardon":
                     this.setState({cardChoosen: cardon})
@@ -178,6 +224,7 @@ class Modal extends PureComponent {
                     }
                     cards["cardon"].nb += 1
                     this.updateCards()
+                    
                break;
                case "gogueyTOTY":
                     this.setState({cardChoosen: gogueyTOTY})
@@ -186,6 +233,7 @@ class Modal extends PureComponent {
                     }
                     cards["gogueyTOTY"].nb += 1
                     this.updateCards()
+                    
                break;
                case "paj":
                     this.setState({cardChoosen: paj})
@@ -194,6 +242,7 @@ class Modal extends PureComponent {
                     }
                     cards["paj"].nb += 1
                     this.updateCards()
+                    
                break;
                case "rhety":
                     this.setState({cardChoosen: rhety})
@@ -202,13 +251,24 @@ class Modal extends PureComponent {
                     }
                     cards["rhety"].nb += 1
                     this.updateCards()
+                    
                break;
                default:
                     toast.error("Connexion avec le serveur perdue, veuillez vous reconnecter")
                     break;
           }
+          this.changeGemsTo()
           console.log(randomCard);
+          // this.props.loadGems(this.props.pseudo)
+          this.clickTest()
      }
+
+     clickTest(){
+          setTimeout(() => { 
+                              window.location.reload()
+                          }, 3000)}
+                         
+     
      render() {
           // formulaire
           return(
@@ -223,7 +283,9 @@ class Modal extends PureComponent {
                                     <h1>{this.props.title}</h1>
                                     <p>{this.props.content}</p>
                                </div>
-                               <a class="popup__close" href="#closeModal">X</a>
+                               
+                               <button class="popup__close" onClick={this.clickTest}>X</button>
+                               
                           </div>
                           ) : (
                          <div className={this.state.cardChoosen ? "popup-inner background-open-chess" : "popup-inner background-chess"}>
@@ -236,7 +298,7 @@ class Modal extends PureComponent {
                               </div> */}
                               {!this.state.isCard ? (
                                    <div class="d-flex-center">
-                                        <span class="btn" onClick={()=>this.choose()}>Obtenir ma carte</span>
+                                        <span class="btn" onClick={()=>this.choose()} disabled={!this.state.haveEnoughGems}>Obtenir ma carte</span>
                                    </div>
                               ) : (
                                    <div class="d-flex-center">

@@ -12,8 +12,8 @@ import Shop from './Shop';
 import bckSound from '../audio/freakshow.mp3';
 
 class Home extends PureComponent {
-     constructor() {
-          super();
+     constructor(props) {
+          super(props);
           this.state = {
                currentItem: null,
                redirect: false,
@@ -21,54 +21,70 @@ class Home extends PureComponent {
           this.deconnect = this.deconnect.bind(this);
      }
      componentDidMount = () =>{
-          toast.dark("Bienvenue sur OpenProf !")
-          
+          // toast.dark("Bienvenue sur OpenProf !")
+          console.log(this.props)
      } 
 
+     
      deconnect(pseudo){
-          this.setState({currentItem: 5, redirect: true})
-          var __data__ = {
-               "pseudo": pseudo,
-               "etat": "hors-ligne"
+          if(pseudo != null || pseudo != undefined){
+               this.setState({currentItem: 5, redirect: true})
+               var __data__ = {
+                    "pseudo": pseudo,
+                    "etat": "hors-ligne"
+               }
+               updateUser(pseudo, __data__)
+               .then(
+                    res=>{
+                         toast.dark("Vous êtes désormais déconnecté")
+                         console.log(res)
+                         this.setState({redirect: true})
+                    }
+               )
+               .catch(
+                    error=>{
+                         toast.error("Une erreur est survenue lors de la déconnexion")
+                         console.log(error)
+                    }
+               )
+               this.props.history.push('/login')
+               // toast.dark('Déconnexion réussie')
+          }else{
+               this.props.history.push('/login')
+               toast.dark("Déconnexion des serveurs OpenProf, veuillez patienter...")
+               setTimeout(() => { 
+                    for (let index = 0; index < 1; index++) {
+                         toast.dark("Déconnexion réussie")     
+                    }
+                    this.props.history.push('/');
+                    }, 5000)
           }
-          updateUser(pseudo, __data__)
-          .then(
-               res=>{
-                    toast.dark("Vous êtes désormais déconnecté")
-                    console.log(res)
-                    this.setState({redirect: true})
-               }
-          )
-          .catch(
-               error=>{
-                    toast.error("Une erreur est survenue lors de la déconnexion")
-                    console.log(error)
-               }
-          )
+          
+          
      }
-
-
-
+     
      render() {
           // formulaire
           // toast.success("Vous êtes désormais connecté !")
-          const {currentItem} = this.state
+          // try {
+               const {currentItem} = this.state
           return (
                <>
                
-               <main onkeydown="return (event.keyCode != 116)" className="row">
+               
+                    <main onkeydown="return (event.keyCode != 116)" className="row">
                     <audio autoPlay loop>
                          <source src={bckSound} type="audio/mpeg"/>
                     </audio>
                     <aside className="sidebar col-lg-4">
                          <nav className="nav">
                               <ul>
-                                   <li className={currentItem===0 && 'active'} onClick={()=>{this.setState({currentItem: 0})}}><a href="#accueil">Accueil</a></li>
-                                   <li className={currentItem===1 && 'active'} onClick={()=>{this.setState({currentItem: 1})}}><a href="#coffre">Coffres</a></li>
-                                   <li className={currentItem===2 && 'active'} onClick={()=>{this.setState({currentItem: 2})}}><a href="#inventaire">Inventaire</a></li>
-                                   <li className={currentItem===3 && 'active'} onClick={()=>{this.setState({currentItem: 3})}}><a href="#boutique">Boutique</a></li>
-                                   <li className={currentItem===4 && 'active'} onClick={()=>{this.setState({currentItem: 4})}}hidden><a href="#online">Online</a></li>
-                                   <li className={currentItem===5 && 'active'}><span onClick={()=>this.deconnect(this.props.auth[0])}>Déconnexion</span></li>
+                                   <li className={currentItem===0 && 'active'} onClick={()=>{this.setState({currentItem: 0})}}><a>Actualité</a></li>
+                                   <li className={currentItem===1 && 'active'} onClick={()=>{this.setState({currentItem: 1})}}><a>Coffres</a></li>
+                                   <li className={currentItem===2 && 'active'} onClick={()=>{this.setState({currentItem: 2})}}><a>Inventaire</a></li>
+                                   <li className={currentItem===3 && 'active'} onClick={()=>{this.setState({currentItem: 3})}}><a>Boutique</a></li>
+                                   <li className={currentItem===4 && 'active'} onClick={()=>{this.setState({currentItem: 4})}}hidden><a>Online</a></li>
+                                   <li className={currentItem===5 && 'active'}><span onClick={()=>this.deconnect(this.props.location && this.props.location.auth && this.props.location.state.auth[0])}>Déconnexion</span></li>
                               </ul>
                          </nav>
                     </aside>
@@ -86,20 +102,37 @@ class Home extends PureComponent {
                               <Actuality />
                          )}
                          {currentItem===1 && (
-                              <Chess auth={this.props.auth}/>
+                              <Chess auth={this.props.location && this.props.location.state && this.props.location.state.auth}/>
                          )}
                          {currentItem===2 && (
-                              <Cards auth={this.props.auth}/>
+                              <Cards auth={window.location.pathname.split('/')[2]}/>
                          )}
                          {currentItem===3 && (
-                              <Shop />
+                              <Shop auth={window.location.pathname.split('/')[2]}/>
                          )}
                          
 
                     </section>
                </main>
+              
                </>
           )
+          // } catch (error) {
+          //      return(
+          //           <>
+          //           {
+          //           setTimeout(() => { 
+          //                for (let index = 0; index < 1; index++) {
+          //                     toast.error("Erreur d'authentification. Veuillez vous reconnecter...");      
+          //                }
+          //                this.props.history.push('/');
+                         
+          //            }, 5000)}
+          //           <Loader />
+          //           </>
+          //      )
+          // }
+          
      }
 }
 

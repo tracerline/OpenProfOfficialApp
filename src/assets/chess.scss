@@ -17,18 +17,20 @@
      width: auto;
      margin-top: 40px;
      margin-bottom: 30px !important;
+     
      img{
           background: #5e42a6;
-          border-radius: 100%;
+        //   border-radius: 100%;
           transition-property: transform, padding;
           transition-duration: .4s;
+          filter: none !important;
           transition-timing-function: ease-in-out;
           transform: scale(1);
           padding: auto;
           &:hover{
                cursor: pointer;
-               transform: scale(1.1);
-               padding: 15px;
+               transform: scale(1.2);
+            //    padding: 15px;
           }
      }
 
@@ -322,4 +324,17 @@ hr{
     background-repeat: no-repeat;
     backdrop-filter: blur(.1em);
     // background-attachment: fixed;
+}
+
+.chest-container{
+    margin: 0 !important;
+    background-color: #5e42a6 !important; 
+}
+
+.chest-overlay{
+    background: url('https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg?size=626&ext=jpg') no-repeat !important;
+    background-size: contain !important;
+    background-position: right !important;
+    // padding-left: 100px;
+    height: 100%;
 }

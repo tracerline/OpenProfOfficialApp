@@ -36,14 +36,14 @@ class Modal extends PureComponent {
           }
           // this.cards = [gaillard, lbath, muridi, alix, vlestid, maarouf, gwen, cardon, gogueyTOTY, rhety, paj];
           this.cards = {
-               "gaillard": 0.25,
-               "lbath": 0.25,
-               "muridi": 0.125,
-               "alix": 0.125,
-               "maarouf": 0.0625,
-               "gwen": 0.0625,
-               "cardon": 0.05,
-               "gogueyTOTY": 0.05,
+               "gaillard": 25.45,
+               "lbath": 25.45,
+               "muridi": 9.125,
+               "alix": 9.0125,
+               "maarouf": 2.0625,
+               "gwen": 2.00625,
+               "cardon": 1.00005,
+               "gogueyTOTY": 1.00005,
                "rhety": 0.000125,
                "paj":  0.000125,
           }
@@ -68,21 +68,29 @@ class Modal extends PureComponent {
      }
      componentDidMount = () =>{
           Gifffer();
-          this.getCardsUser();
-          this.props.pseudo && getUser(this.props.pseudo).then(
-               res=>{
-                    console.log("only user : ", res)
-                    this.userCards = JSON.parse(res[0].cards)
+          try {
+               this.getCardsUser();
+               this.props.pseudo && getUser(this.props.pseudo).then(
+                    res=>{
+                         console.log("only user : ", res)
+                         this.userCards = JSON.parse(res[0].cards)
                     // console.log("gaillard test", this.userCards[0]["gaillard"].isGet)
-               }
-          ).catch(error=>{console.log(error)})
-          this.initGems()
+                    }
+               ).catch(error=>{console.log(error)})
+               this.initGems()
+          } catch (error) {
+               toast.error(error)
+          }
+          
      }
 
      updateCards(){
           updateUserCards(this.props.pseudo, this.userCards)
-          .then(toast.dark("Inventaire mis à jour"))
-          .catch(error=>{console.log(error)})
+          .then(toast.dark("Rechargement des ressources..."))
+          .catch(error=>{
+               console.log(error)
+               toast.error("Connexion avec le serveur interrompue")
+          })
      }
 
      initGems(){
@@ -268,7 +276,7 @@ class Modal extends PureComponent {
           if(this.props && this.props.isChess){
                setTimeout(() => { 
                     window.location.reload()
-                }, 3000)}
+                }, 5000)}
           }
           
                          
@@ -306,16 +314,21 @@ class Modal extends PureComponent {
                                    <h1>{this.props.title}</h1>
                                    <p>{this.props.content}</p>
                               </div> */}
-                              {!this.state.isCard ? (
+                              {!this.state.isCard && this.state.userGems >= 10 && (
                                    <div class="d-flex-center">
                                         <span class="btn" onClick={()=>this.choose()} disabled={!this.state.haveEnoughGems}>Obtenir ma carte</span>
                                    </div>
-                              ) : (
+                              )}
+                              {this.state.isCard && this.state.userGems >= 10 && (
                                    <div class="d-flex-center">
                                         <img class="card" src={this.state.cardChoosen} alt=""/>
                                    </div>
                               )}
-                              
+                              {!this.state.isCard && this.state.userGems < 10 && (
+                                   <div class="d-flex-center">
+                                        <span class="btn" disabled>Vous n'avez plus de gems...</span>
+                                   </div>
+                              )}
 
                               <a class="popup__close" href="#closeModale" onClick={()=>this.setState({isCard: false, cardChoosen: null})}>X</a>
                          </div>

@@ -17,27 +17,39 @@ class Actuality extends PureComponent {
      constructor() {
           super();
           this.state = {
-               players: null
+               players: null,
+               listPlayers: null
           }
-          this.listPlayers = []
+          // this.listPlayers = null;
+          this.listOnline = this.listOnline.bind(this);
+          // this.listPlayers = null;
      }
      componentDidMount = () =>{
-          getUsers().then(res=>{
-               this.setState({players: res})
-               console.log("players ==> ", res)
-               this.listOnline(res)
-          })
-          .catch(error=>{console.log(error)})
-
+          
+          
           // this.state.players && this.listOnline(this.state.players)
      }
 
-     listOnline(players){
-          for (let index = 0; index < players.length; index++) {
-               const element = players[index];
-               this.listPlayers.push(element.pseudo);
-          }
-          
+
+     listOnline(){
+          console.log("listing players online...")
+          getUsers().then(res=>{
+               this.setState({players: res})
+               console.log("players ==> ", res)
+               
+          })
+          .catch(error=>{console.log(error)})
+          const listP = this.state.players && this.state.players.map(player=>(
+               <li class="player-list">
+                    <div className="d-flex-between">
+                         <span>{player && player.pseudo && player.pseudo}</span>
+                         {/* <div className="online-state"></div> */}
+                         <span><img src='https://www.icone-png.com/png/28/28402.png' alt=""/></span>
+                    </div>
+               </li>
+          ))
+          this.setState({listPlayers: listP})
+          console.log(this.state.listPlayers && this.state.listPlayers)
      }    
 
      render() {
@@ -126,11 +138,26 @@ class Actuality extends PureComponent {
                          </div>
                          <div class="form-container sign-in-container" >
                               <form action="#" className="chest-container">
-                                   <h1>Dashboard</h1>
-                                   <ul>
-                                        {this.state.players && this.state.players.map((player, index)=>{
-                                             <li class="dark">{player.pseudo}</li>
-                                        })}
+                                   <span className="btn" onClick={this.listOnline}>Voir les joueurs OpenProf</span>
+                                   {/* <h1 className="bottom-3"><img src='https://www.pngkit.com/png/full/58-581290_20kib-764x511-szbqnpi-xbox-360-controller-logo.png' alt=""/></h1> */}
+                                   <ul className="players">
+                                        
+                                   {this.state.players && this.state.players.map(player=>(
+                                   <li class="player-list">
+                                        <div className="d-flex-between">
+                                             <span>{player && player.pseudo && player.pseudo}</span>
+                         {/* <div className="online-state"></div> */}
+                                             {player && player.etat === "Actif" ? (
+                                                  <div className="online-state"></div>
+                                             ) : (
+                                                  <div className="online-state-not"></div>
+                                             )}
+                                             {/* <span><img src='https://www.icone-png.com/png/28/28402.png' alt=""/></span> */}
+                                        </div>
+                                   </li>
+                                   ))}
+                                   
+                                        
                                    </ul>
                                    {/* <input type="email" placeholder="Identifiant OpenProf" onChange={this.emailListener} />
                                    <input type="password" placeholder="Mot de passe" onChange={this.passwordListener}/>
@@ -145,7 +172,7 @@ class Actuality extends PureComponent {
                                         <p>To keep connected with us please login with your personal info</p>
                                         <button class="ghost" id="signIn">Sign In</button>
                                    </div>
-                                   <div class="overlay-right chest-overlay">
+                                   <div class="overlay-right multiplayer-dashboard">
                                         {/* <div className="cards-carousel">
                                              <img alt="" src={maarouf} width="100" height="120"/>
                                              <img alt="" src={gwen} width="100" height="120"/>

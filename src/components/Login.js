@@ -48,6 +48,35 @@ class Login extends PureComponent {
           // if(!this.state.isRedirected){
           //      toast.dark("Vous êtes désormais déconnecté");
           // }
+          
+     }
+
+     deconnect(pseudo){
+          if(pseudo != null || pseudo != undefined){
+               // this.setState({currentItem: 5, : true})
+               var __data__ = {
+                    "pseudo": pseudo,
+                    "etat": "hors-ligne"
+               }
+               updateUser(pseudo, __data__)
+               .then(
+                    res=>{
+                         // toast.dark("Vous êtes désormais déconnecté")
+                         console.log(res)
+                         // this.setState({redirect: true})
+                    }
+               )
+               .catch(
+                    error=>{
+                         // toast.error("Une erreur est survenue lors de la déconnexion")
+                         console.log(error)
+                    }
+               )
+               // this.props.history.push('/login')
+               // toast.dark('Déconnexion réussie')
+          }
+          
+          
      }
 
      emailListener = e => {
@@ -195,11 +224,11 @@ class Login extends PureComponent {
                                    <input type="email" placeholder="Identifiant OpenProf" onChange={this.emailListener} />
                                    <input type="password" placeholder="Mot de passe" onChange={this.passwordListener}/>
                                    {/* <a href="#">Forgot your password?</a> */}
-                                   {!this.state.loadingConnect && !this.state.connexionNet ? (
+                                   {/* {!this.state.loadingConnect && !this.state.connexionNet ? ( */}
                                         <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Se connecter</button>
-                                   ) : (
-                                        <button disabled><Loader /></button>
-                                   )}
+                                   
+                                        {/* <button disabled><Loader /></button> */}
+                                   {/* )} */}
                                    {/* <button disabled={(emailCorrect && passwordCorrect) ? false : true} onClick={this.onSubmit}>Se connecter</button> */}
                               </form>
                          </div>

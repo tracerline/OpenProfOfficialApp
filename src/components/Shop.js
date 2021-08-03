@@ -19,6 +19,7 @@ class Shop extends PureComponent {
 			counter: false, 
 			deadline: "Gratuit",
 			userDateGem: null,
+			end: null
 		}
 		this.timer = 0;
 		
@@ -35,7 +36,6 @@ class Shop extends PureComponent {
 	convertDateForSQL(date){
 		date = new Date();
 		var tomorrow = new Date();
-		
 		date = date.getUTCFullYear()         + '-' +
         	this.pad(date.getUTCMonth() + 1)  + '-' +
         	this.pad(date.setDate(date.getDate()+1))       + ' ' +
@@ -140,6 +140,26 @@ class Shop extends PureComponent {
 		
 	}
 
+	compareDate(){
+		var today = new Date()
+		var tomorrow = new Date()
+		tomorrow = today.setMonth(today.getMonth()+1)
+		var year = today.getFullYear()
+		var month = tomorrow.getMonth
+		var day = today.getDate()
+		const {end} = this.state
+		var n_d = "" + year + "-" + "0" + (today.getMonth()) + "-" + "0" + day
+		getDateUserFreeGem(this.props.auth).then(res=>{this.setState({end: res[0].dateFreeGem})}).catch(error=>{console.log(error)})
+		// today = this.convertDateForSQL(today)
+		console.log("today", n_d)
+		console.log("end", end)
+		if(end === n_d){
+			return true
+		}else{
+			return false
+		}
+	}
+
      render() {
           return(
           <main>
@@ -169,7 +189,7 @@ class Shop extends PureComponent {
 						) : (
 							<button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}} disabled={this.state.counter}><Clock deadline={this.state.deadline} /></button>
 						)} */}
-						{this.state.userDateGem === null ? (
+						{this.state.userDateGem === null || this.compareDate() === true ? (
 							<button class="buy--btn top-3" onClick={()=>{this.setDateCounter()}}>Gratuit</button>
 						) : (
 							<button class="buy--btn top-3" disabled><Clock deadline={this.state.userDateGem}/></button>

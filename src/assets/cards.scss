@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+
 .cards{
      display: grid;
      grid-template-columns: repeat(2, 1fr);
@@ -41,15 +43,36 @@
      }
 }
 
-img.disabled{
+.cards img.disabled{
      // transform: scale(1.08);
                pointer-events: none ;
-               filter: grayscale(2) ;
+               filter: grayscale(2) blur(.3em) ;
                opacity: .7 ;
+               
 }
 
 img.clear{
      pointer-events: all;
                filter: grayscale(0) !important;
                opacity: 1 !important;
+}
+
+.nbCard{
+     width: 60px;
+     height: 60px;
+     border-radius: 100%;
+     background-color: purple;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: absolute !important;
+     margin-left: 15%;
+     border: 5px solid rgb(85, 2, 85);
+     z-index: 9;
+     span{
+          color: white;
+          font-weight: 500;
+          font-family: 'Poppins', sans-serif;
+          font-size: 20px;
+     }
 }

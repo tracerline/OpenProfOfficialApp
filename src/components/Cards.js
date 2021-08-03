@@ -97,58 +97,155 @@ class Cards extends PureComponent {
                </div >
                <div className="cards">
                     <div>
-                         <h3>Gaillard</h3>
+                         {this.state.userCards && !this.state.userCards[0]["gaillard"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Faillard</h3>
+                         )}
                          <h4 className='common'>Carte commune</h4>
+                         {this.state.userCards && this.state.userCards[0]["gaillard"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["gaillard"].nb}</span>
+                              </div>
+                         )}
                          <img src={gaillard} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["gaillard"].isGet ? "disabled" : "clear"}/>
+                         
                     </div>
                     <div>
-                         <h3>Lbath 7</h3>
+                         {this.state.userCards && !this.state.userCards[0]["lbath"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Lbath 7</h3>
+                         )}
+                         
                          <h4 className='common'>Carte commune</h4>
+                         {this.state.userCards && this.state.userCards[0]["lbath"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["lbath"].nb}</span>
+                              </div>
+                         )}
                          <img src={lbath} alt="" width="210" height="250"class={this.state.userCards && !this.state.userCards[0]["lbath"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Goguey</h3>
+                         {this.state.userCards && !this.state.userCards[0]["alix"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Goglix</h3>
+                         )}
                          <h4 className='rare'>Carte rare</h4>
+                         {this.state.userCards && this.state.userCards[0]["alix"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["alix"].nb}</span>
+                              </div>
+                         )}
                          <img src={alix} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["alix"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Muridi</h3>
+                         {this.state.userCards && !this.state.userCards[0]["muridi"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Juridi</h3>
+                         )}
                          <h4 className='rare'>Carte rare</h4>
+                         {this.state.userCards && this.state.userCards[0]["muridi"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["muridi"].nb}</span>
+                              </div>
+                         )}
                          <img src={muridi} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["muridi"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Vlestid</h3>
+                         <h3>Inconnue</h3>
                          <h4 className='rare'>Carte rare</h4>
+                         {/* {this.state.userCards && this.state.userCards[0]["vlestid"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["vlestid"].nb}</span>
+                              </div>
+                         )} */}
                          <img src={vlestid} alt="" width="210" height="250" class={"disabled"}/>
                     </div>
                     <div>
-                         <h3>Faarouf</h3>
+                         {this.state.userCards && !this.state.userCards[0]["maarouf"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Faarouf</h3>
+                         )}
                          <h4 className='epic'>Carte épique</h4>
+                         {this.state.userCards && this.state.userCards[0]["maarouf"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["maarouf"].nb}</span>
+                              </div>
+                         )}
                          <img src={maarouf} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["maarouf"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Salaun</h3>
+                         {this.state.userCards && !this.state.userCards[0]["gwen"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Gwen</h3>
+                         )}
                          <h4 className='epic'>Carte épique</h4>
+                         {this.state.userCards && this.state.userCards[0]["gwen"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["gwen"].nb}</span>
+                              </div>
+                         )}
                          <img src={gwen} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["gwen"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Carton</h3>
+                         {this.state.userCards && !this.state.userCards[0]["cardon"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Carton</h3>
+                         )}
                          <h4 className='legendary'>Carte légendaire</h4>
+                         {this.state.userCards && this.state.userCards[0]["cardon"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["cardon"].nb}</span>
+                              </div>
+                         )}
                          <img src={cardon} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["cardon"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Goguey Toty</h3>
+                         {this.state.userCards && !this.state.userCards[0]["gogueyTOTY"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Goglix TOTY</h3>
+                         )}
                          <h4 className='legendary'>Carte légendaire</h4>
+                         {this.state.userCards && this.state.userCards[0]["gogueyTOTY"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["gogueyTOTY"].nb}</span>
+                              </div>
+                         )}
                          <img src={gogueyTOTY} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["gogueyTOTY"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Monseigneur</h3>
+                         {this.state.userCards && !this.state.userCards[0]["rhety"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>Monseigneur</h3>
+                         )}
                          <h4 className='ultra'>Carte ultra</h4>
+                         {this.state.userCards && this.state.userCards[0]["rhety"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["rhety"].nb}</span>
+                              </div>
+                         )}
                          <img src={rhety} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["rhety"].isGet ? "disabled" : "clear"}/>
                     </div>
                     <div>
-                         <h3>Paj</h3>
+                         {this.state.userCards && !this.state.userCards[0]["paj"].isGet ? (
+                              <h3>Inconnue</h3>
+                         ) : (
+                              <h3>PAJ</h3>
+                         )}
                          <h4 className='ultra'>Carte ultra</h4>
+                         {this.state.userCards && this.state.userCards[0]["paj"].isGet && (
+                              <div className="nbCard">
+                                   <span>{this.state.userCards && this.state.userCards[0]["paj"].nb}</span>
+                              </div>
+                         )}
                          <img src={paj} alt="" width="210" height="250" class={this.state.userCards && !this.state.userCards[0]["paj"].isGet ? "disabled" : "clear"}/>
                     </div>
                </div>

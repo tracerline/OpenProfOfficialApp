@@ -30,8 +30,8 @@ class Home extends PureComponent {
           if(pseudo != null || pseudo != undefined){
                this.setState({currentItem: 5, redirect: true})
                var __data__ = {
-                    "pseudo": pseudo,
-                    "etat": "hors-ligne"
+                    "etat": "hors-ligne",
+                    "pseudo": pseudo
                }
                updateUser(pseudo, __data__)
                .then(
@@ -50,14 +50,24 @@ class Home extends PureComponent {
                this.props.history.push('/login')
                // toast.dark('Déconnexion réussie')
           }else{
-               this.props.history.push('/login')
+               
+               var __data__ = {
+                    "pseudo": pseudo,
+                    "etat": "hors-ligne"
+               }
                toast.dark("Déconnexion des serveurs OpenProf, veuillez patienter...")
-               setTimeout(() => { 
-                    for (let index = 0; index < 1; index++) {
-                         toast.dark("Déconnexion réussie")     
+               updateUser(window.location.pathname.split('/')[2], __data__)
+               .then(
+                    res=>{
+                         // toast.dark("Vous êtes désormais déconnecté")
+                         console.log(res)
+                         this.setState({redirect: true})
+                         setTimeout(() => { 
+                              this.props.history.push('/');
+                              }, 5000)
                     }
-                    this.props.history.push('/');
-                    }, 5000)
+               )
+               
           }
           
           
@@ -84,7 +94,7 @@ class Home extends PureComponent {
                                    <li className={currentItem===2 && 'active'} onClick={()=>{this.setState({currentItem: 2})}}><a>Inventaire</a></li>
                                    <li className={currentItem===3 && 'active'} onClick={()=>{this.setState({currentItem: 3})}}><a>Boutique</a></li>
                                    <li className={currentItem===4 && 'active'} onClick={()=>{this.setState({currentItem: 4})}}hidden><a>Online</a></li>
-                                   <li className={currentItem===5 && 'active'}><span onClick={()=>this.deconnect(this.props.location && this.props.location.auth && this.props.location.state.auth[0])}>Déconnexion</span></li>
+                                   <li className={currentItem===5 && 'active'}><span onClick={()=>this.deconnect(window.location.pathname.split('/')[2])}>Déconnexion</span></li>
                               </ul>
                          </nav>
                     </aside>

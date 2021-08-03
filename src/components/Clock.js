@@ -15,7 +15,9 @@ class Clock extends Component {
   }
   componentDidMount() {
     setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
+//     this.props.verifyDateCounter()
   }
+  
   leading0(num) {
     return num < 10 ? "0" + num : num;
   }
@@ -34,15 +36,15 @@ class Clock extends Component {
   render() {
     return (
       <div>
-        <div className="Clock-days">{this.leading0(this.state.days)} Days</div>
+        <div className="Clock-days">{this.leading0(this.state.days)} Jours</div>
         <div className="Clock-hours">
-          {this.leading0(this.state.hours)} Hours
+          {this.leading0(this.state.hours)} Heures
         </div>
         <div className="Clock-minutes">
           {this.leading0(this.state.minutes)} Minutes
         </div>
         <div className="Clock-seconds">
-          {this.leading0(this.state.seconds)} Seconds
+          {this.leading0(this.state.seconds)} Secondes
         </div>
       </div>
     );
